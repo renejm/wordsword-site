@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Word Sword: Duelo de Palavras</title>
+<meta name="description" content="Word Sword: Duelo de Palavras é um jogo de palavras em português para Android, com reinos, equipes e torneios. Sem anúncios. Em breve no Google Play.">
+<meta name="theme-color" content="#7A1F2B">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Word Sword: Duelo de Palavras">
+<meta property="og:description" content="Jogo de palavras em português, com reinos, equipes e torneios. Sem anúncios. Em breve no Google Play.">
+<meta property="og:url" content="https://wordsword.com.br/">
+<meta property="og:locale" content="pt_BR">
+<link rel="canonical" href="https://wordsword.com.br/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237A1F2B'/%3E%3Cpath d='M32 6l9 10v26H23V16z' fill='%23E6EAF0'/%3E%3Crect x='14' y='42' width='36' height='6' rx='3' fill='%23B07A3B'/%3E%3Crect x='28' y='48' width='8' height='6' fill='%23F3E6C8'/%3E%3Ccircle cx='32' cy='57' r='4' fill='%23B07A3B'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --pergaminho: #F3E6C8;
+    --pergaminho-claro: #FBF5E6;
+    --pergaminho-escuro: #E6D3A8;
+    --esmeralda: #2E7D5B;
+    --vinho: #7A1F2B;
+    --vinho-escuro: #5A1520;
+    --bronze: #B07A3B;
+    --cobre: #C8763E;
+    --tinta: #3B2A1E;
+    --tinta-suave: #5C4636;
+    --raio: 18px;
+    --fonte-titulo: "Baloo 2", "Nunito", "Trebuchet MS", system-ui, sans-serif;
+    --fonte-texto: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--pergaminho);
+    color: var(--tinta);
+    font-family: var(--fonte-texto);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  a { color: var(--vinho); }
+  a:focus-visible, .botao:focus-visible { outline: 3px solid var(--esmeralda); outline-offset: 3px; }
+  .conteudo { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+  /* Topo */
+  header.topo {
+    background: var(--vinho);
+    color: var(--pergaminho-claro);
+    border-bottom: 6px solid var(--bronze);
+  }
+  header.topo .conteudo { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 14px; padding-bottom: 14px; }
+  .marca { display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none; font-family: var(--fonte-titulo); font-weight: 800; font-size: 22px; letter-spacing: .5px; }
+  .marca svg { width: 34px; height: 34px; }
+  nav.menu { display: flex; gap: 18px; flex-wrap: wrap; }
+  nav.menu a { color: var(--pergaminho); text-decoration: none; font-weight: 700; font-size: 15px; }
+  nav.menu a:hover { text-decoration: underline; }
+
+  /* Abertura */
+  .abertura {
+    background:
+      radial-gradient(ellipse at 70% 30%, rgba(255,255,255,.55), transparent 60%),
+      linear-gradient(180deg, var(--pergaminho-claro), var(--pergaminho));
+    border-bottom: 2px solid var(--pergaminho-escuro);
+  }
+  .abertura .conteudo { display: grid; grid-template-columns: 1.25fr 1fr; align-items: center; gap: 32px; padding-top: 56px; padding-bottom: 56px; }
+  .selo-dev {
+    display: inline-block; background: var(--esmeralda); color: #fff;
+    font-weight: 800; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;
+    padding: 6px 12px; border-radius: 999px; margin-bottom: 14px;
+  }
+  h1 {
+    font-family: var(--fonte-titulo); font-weight: 800; line-height: 1.05;
+    font-size: clamp(40px, 7vw, 68px); margin: 0 0 6px; color: var(--vinho);
+    text-shadow: 0 2px 0 var(--pergaminho-escuro);
+  }
+  .subtitulo { font-family: var(--fonte-titulo); font-size: clamp(22px, 3.4vw, 30px); font-weight: 700; color: var(--bronze); margin: 0 0 18px; }
+  .chamada { font-size: 19px; max-width: 34em; margin: 0 0 26px; color: var(--tinta-suave); }
+  .botoes { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .botao {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--tinta); color: var(--pergaminho-claro);
+    padding: 12px 20px; border-radius: 14px; text-decoration: none; font-weight: 800;
+    box-shadow: 0 4px 0 #1f160f;
+  }
+  .botao[aria-disabled="true"] { cursor: default; }
+  .botao small { display: block; font-weight: 600; font-size: 12px; opacity: .8; line-height: 1.1; }
+  .botao span { line-height: 1.15; }
+  .botao.secundario { background: transparent; color: var(--vinho); box-shadow: inset 0 0 0 2px var(--vinho); }
+  .ilustracao { display: flex; justify-content: center; }
+  .ilustracao svg { width: min(340px, 80vw); height: auto; filter: drop-shadow(0 18px 18px rgba(59,42,30,.18)); }
+  .flutuar { animation: flutuar 4s ease-in-out infinite; transform-origin: 50% 60%; }
+  @keyframes flutuar { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
+  @media (prefers-reduced-motion: reduce) { .flutuar { animation: none; } html { scroll-behavior: auto; } }
+
+  /* Seções */
+  section { padding: 64px 0; }
+  section.faixa { background: var(--pergaminho-claro); border-top: 2px solid var(--pergaminho-escuro); border-bottom: 2px solid var(--pergaminho-escuro); }
+  h2 { font-family: var(--fonte-titulo); font-weight: 800; color: var(--vinho); font-size: clamp(28px, 4.5vw, 40px); line-height: 1.15; margin: 0 0 10px; }
+  .intro { color: var(--tinta-suave); max-width: 40em; margin: 0 0 32px; }
+  .capitular::first-letter {
+    float: left; font-family: var(--fonte-titulo); font-weight: 800; font-size: 3.4em; line-height: .9;
+    color: var(--vinho); margin: 2px 8px 0 0;
+  }
+
+  .grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+  .cartao {
+    background: #fff; border: 2px solid var(--pergaminho-escuro); border-radius: var(--raio);
+    padding: 22px 20px; box-shadow: 0 4px 0 var(--pergaminho-escuro);
+  }
+  .cartao h3 { font-family: var(--fonte-titulo); font-size: 22px; margin: 12px 0 6px; color: var(--tinta); }
+  .cartao p { margin: 0; color: var(--tinta-suave); font-size: 16px; }
+  .icone {
+    width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center;
+    background: var(--pergaminho); border: 2px solid var(--bronze);
+    font-family: var(--fonte-titulo); font-weight: 800; font-size: 24px; color: var(--vinho);
+  }
+
+  .duas-colunas { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: start; }
+  ul.lista { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+  ul.lista li { display: grid; grid-template-columns: 30px 1fr; gap: 10px; align-items: start; }
+  ul.lista li::before {
+    content: ""; width: 22px; height: 22px; margin-top: 3px; border-radius: 50%;
+    background: var(--esmeralda); box-shadow: inset 0 0 0 5px #48a37d;
+  }
+  ul.lista strong { color: var(--tinta); }
+
+  .estandarte {
+    background: var(--vinho); color: var(--pergaminho-claro); border-radius: var(--raio);
+    padding: 28px 26px 40px; position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 22px), 0 100%);
+  }
+  .estandarte h3 { font-family: var(--fonte-titulo); font-size: 26px; margin: 0 0 8px; color: var(--pergaminho); }
+  .estandarte p { margin: 0 0 10px; }
+  .titulos { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .titulos span { background: rgba(243,230,200,.14); border: 1px solid rgba(243,230,200,.45); border-radius: 999px; padding: 4px 12px; font-size: 14px; font-weight: 700; }
+
+  .compromissos .cartao { border-color: #cfe3d8; box-shadow: 0 4px 0 #cfe3d8; }
+  .compromissos .icone { border-color: var(--esmeralda); color: var(--esmeralda); }
+
+  /* Rodapé */
+  footer { background: var(--tinta); color: var(--pergaminho); padding: 40px 0 28px; font-size: 15px; }
+  footer .colunas { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; }
+  footer a { color: var(--pergaminho); }
+  footer nav { display: flex; flex-direction: column; gap: 6px; }
+  footer .fim { border-top: 1px solid rgba(243,230,200,.2); margin-top: 26px; padding-top: 16px; font-size: 13px; opacity: .8; }
+
+  @media (max-width: 760px) {
+    .abertura .conteudo, .duas-colunas { grid-template-columns: 1fr; }
+    .ilustracao { order: -1; }
+    .ilustracao svg { width: min(240px, 70vw); }
+    nav.menu { display: none; }
+    section { padding: 48px 0; }
+    .abertura .conteudo { padding-top: 32px; padding-bottom: 44px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="conteudo">
+    <a class="marca" href="#inicio" aria-label="Word Sword, início">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#F3E6C8"/><path d="M32 6l9 10v26H23V16z" fill="#C9D2DC"/><path d="M32 6l9 10v26h-9z" fill="#E6EAF0"/><rect x="14" y="42" width="36" height="6" rx="3" fill="#B07A3B"/><rect x="28" y="48" width="8" height="6" fill="#7A1F2B"/><circle cx="32" cy="57" r="4" fill="#B07A3B"/><circle cx="32" cy="57" r="1.8" fill="#2E7D5B"/></svg>
+      Word Sword
+    </a>
+    <nav class="menu" aria-label="Seções">
+      <a href="#jogo">O jogo</a>
+      <a href="#equipes">Equipes</a>
+      <a href="#compromissos">Compromissos</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <div class="abertura">
+    <div class="conteudo">
+      <div>
+        <span class="selo-dev">Em desenvolvimento</span>
+        <h1>Word Sword</h1>
+        <p class="subtitulo">Duelo de Palavras</p>
+        <p class="chamada">Um jogo de palavras em português, para jogar com os amigos. Atravesse reinos encantados, desvende palavras com a ajuda da Lumina, a espada mascote, e lute pela sua equipe no torneio da semana.</p>
+        <div class="botoes">
+          <a class="botao" href="#contato" aria-disabled="true">
+            <svg width="22" height="24" viewBox="0 0 22 24" aria-hidden="true"><path d="M1 1.5v21l11-10.5z" fill="#2E7D5B"/><path d="M1 1.5l14.5 8.2L12 12z" fill="#48a37d"/><path d="M1 22.5l14.5-8.2L12 12z" fill="#C8763E"/><path d="M15.5 9.7L21 12.8l-5.5 3.1L12 12z" fill="#F3E6C8"/></svg>
+            <span><small>Em breve no</small>Google Play</span>
+          </a>
+          <a class="botao secundario" href="#jogo">Conheça o jogo</a>
+        </div>
+      </div>
+      <div class="ilustracao">
+        <svg class="flutuar" viewBox="0 0 240 320" role="img" aria-label="Lumina, a espada mascote do jogo">
+          <defs>
+            <linearGradient id="lamina" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#9AA5B4"/><stop offset=".45" stop-color="#E9EDF2"/><stop offset="1" stop-color="#B9C3CF"/>
+            </linearGradient>
+            <linearGradient id="borda" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#D7E6F5"/><stop offset="1" stop-color="#8FA3BB"/>
+            </linearGradient>
+            <linearGradient id="bronze" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#D9A566"/><stop offset="1" stop-color="#9A6430"/>
+            </linearGradient>
+            <radialGradient id="pomo" cx=".35" cy=".35" r=".7">
+              <stop offset="0" stop-color="#E2B377"/><stop offset="1" stop-color="#8E5A2A"/>
+            </radialGradient>
+          </defs>
+          <!-- faíscas -->
+          <path d="M196 40l5 12 12 5-12 5-5 12-5-12-12-5 12-5z" fill="#E8B84A"/>
+          <path d="M40 150l3.5 8 8 3.5-8 3.5-3.5 8-3.5-8-8-3.5 8-3.5z" fill="#E8B84A"/>
+          <circle cx="214" cy="88" r="4" fill="none" stroke="#E8B84A" stroke-width="2"/>
+          <!-- lâmina com borda -->
+          <path d="M120 18 L176 70 L176 212 L64 212 L64 70 Z" fill="url(#borda)"/>
+          <path d="M120 40 L160 78 L160 212 L80 212 L80 78 Z" fill="url(#lamina)"/>
+          <path d="M120 40 L160 78 L160 120 Q140 90 120 40 Z" fill="#fff" opacity=".35"/>
+          <!-- rosto -->
+          <circle cx="102" cy="150" r="15" fill="#4A2A17"/><circle cx="138" cy="150" r="15" fill="#4A2A17"/>
+          <circle cx="107" cy="144" r="4.5" fill="#fff"/><circle cx="143" cy="144" r="4.5" fill="#fff"/>
+          <circle cx="98" cy="156" r="2" fill="#fff" opacity=".7"/><circle cx="134" cy="156" r="2" fill="#fff" opacity=".7"/>
+          <path d="M108 174 Q120 188 132 174 Q120 180 108 174 Z" fill="#8E2F38"/>
+          <!-- guarda com pontas de folha -->
+          <rect x="44" y="210" width="152" height="22" rx="8" fill="url(#bronze)"/>
+          <path d="M46 221 C30 206 14 212 8 221 C14 230 30 236 46 221 Z" fill="url(#bronze)"/>
+          <path d="M194 221 C210 206 226 212 232 221 C226 230 210 236 194 221 Z" fill="url(#bronze)"/>
+          <path d="M12 221 H42 M198 221 H228" stroke="#7E4F22" stroke-width="2" stroke-linecap="round"/>
+          <!-- cabo e pomo -->
+          <rect x="106" y="232" width="28" height="48" rx="6" fill="#7A1F2B"/>
+          <path d="M106 244 H134 M106 256 H134 M106 268 H134" stroke="#5A1520" stroke-width="3"/>
+          <circle cx="120" cy="296" r="20" fill="url(#pomo)"/>
+          <circle cx="120" cy="296" r="9" fill="#2E7D5B" stroke="#E2B377" stroke-width="2.5"/>
+          <path d="M116 292 l4 -3 4 3" stroke="#7FD1A8" stroke-width="2" fill="none"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <section id="jogo">
+    <div class="conteudo">
+      <h2>Quatro jeitos de duelar com as palavras</h2>
+      <p class="intro capitular">Cada nível é um desafio diferente. Revele as letras escondidas nos pergaminhos, derrube obstáculos e monte armas com as palavras que você encontra: quanto maior a palavra, mais forte o golpe.</p>
+      <div class="grade">
+        <article class="cartao">
+          <div class="icone" aria-hidden="true">A</div>
+          <h3>Anagrama</h3>
+          <p>Gire a roda de letras e forme todas as palavras escondidas no mapa.</p>
+        </article>
+        <article class="cartao">
+          <div class="icone" aria-hidden="true">C</div>
+          <h3>Caça-palavras</h3>
+          <p>Encontre as palavras do tema no meio da grade, em todas as direções.</p>
+        </article>
+        <article class="cartao">
+          <div class="icone" aria-hidden="true">T</div>
+          <h3>Termo</h3>
+          <p>Descubra a palavra secreta com as pistas de cada tentativa.</p>
+        </article>
+        <article class="cartao">
+          <div class="icone" aria-hidden="true">X</div>
+          <h3>Cruzadas</h3>
+          <p>Resolva as dicas e preencha a grade, palavra por palavra.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="equipes" class="faixa">
+    <div class="conteudo duas-colunas">
+      <div>
+        <h2>Jogue em equipe</h2>
+        <p class="intro">Ninguém precisa duelar sozinho. Monte a sua equipe, escolha um brasão e chame os amigos.</p>
+        <ul class="lista">
+          <li><span><strong>Convite pelo WhatsApp:</strong> mande o link e o amigo entra direto na sua equipe.</span></li>
+          <li><span><strong>Vidas compartilhadas:</strong> peça e doe vidas para os colegas de equipe.</span></li>
+          <li><span><strong>Palavra do Dia:</strong> um desafio novo todos os dias, igual para todo mundo.</span></li>
+          <li><span><strong>Cinco reinos para explorar</strong> no lançamento, cada um com seu cenário e seus obstáculos.</span></li>
+        </ul>
+      </div>
+      <div class="estandarte">
+        <h3>Torneio dos Estandartes</h3>
+        <p>Toda semana, cada nível vencido vale pontos para a sua equipe. As melhores do grupo ganham baús, e os destaques de cada equipe conquistam títulos de cavaleiro para a semana seguinte.</p>
+        <div class="titulos" aria-label="Exemplos de títulos">
+          <span>Cavaleiro</span><span>Cavaleiro de Bandeira</span><span>Comendador</span><span>Alferes-Mor</span><span>Grão-Mestre</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="compromissos" class="compromissos">
+    <div class="conteudo">
+      <h2>Nossos compromissos</h2>
+      <p class="intro">Um jogo para toda a família, feito com respeito a quem joga.</p>
+      <div class="grade">
+        <article class="cartao">
+          <div class="icone" aria-hidden="true">✓</div>
+          <h3>Sem anúncios</h3>
+          <p>Nenhuma propaganda interrompe a partida. Nunca.</p>
+        </article>
+        <article class="cartao">
+          <div class="icone" aria-hidden="true">✓</div>
+          <h3>Gratuito</h3>
+          <p>Todo o conteúdo do lançamento é gratuito para jogar.</p>
+        </article>
+        <article class="cartao">
+          <div class="icone" aria-hidden="true">✓</div>
+          <h3>Sem sorte paga</h3>
+          <p>Nada de caixas de recompensa: o que se ganha vem do seu jogo, não de sorteio pago.</p>
+        </article>
+        <article class="cartao">
+          <div class="icone" aria-hidden="true">✓</div>
+          <h3>Seus dados protegidos</h3>
+          <p>Pedimos só o necessário para o jogo funcionar, sem localização, contatos ou e-mail obrigatório.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contato">
+  <div class="conteudo">
+    <div class="colunas">
+      <div>
+        <strong style="font-family: var(--fonte-titulo); font-size: 20px;">Word Sword: Duelo de Palavras</strong>
+        <p style="margin: 6px 0 0;">Dúvidas, sugestões ou suporte:<br><a href="mailto:contato@wordsword.com.br">contato@wordsword.com.br</a></p>
+      </div>
+      <nav aria-label="Informações legais">
+        <a href="/privacidade.html">Política de privacidade</a>
+        <a href="/termos.html">Termos de uso</a>
+        <a href="/excluir-conta.html">Excluir minha conta</a>
+      </nav>
+    </div>
+    <p class="fim">© 2026 Word Sword. Google Play é uma marca da Google LLC. Este site não usa cookies nem rastreadores.</p>
+  </div>
+</footer>
+
+</body>
+</html>
