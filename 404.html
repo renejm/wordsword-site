@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Convite para equipe · Word Sword</title>
+<meta name="description" content="Você foi convidado para uma equipe no Word Sword: Duelo de Palavras.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#7A1F2B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237A1F2B'/%3E%3Cpath d='M32 6l9 10v26H23V16z' fill='%23E6EAF0'/%3E%3Crect x='14' y='42' width='36' height='6' rx='3' fill='%23B07A3B'/%3E%3Crect x='28' y='48' width='8' height='6' fill='%23F3E6C8'/%3E%3Ccircle cx='32' cy='57' r='4' fill='%23B07A3B'/%3E%3C/svg%3E">
+<!--
+  Página do convite (documento técnico do jogo, seção 6.5). O GitHub Pages não
+  tem rotas dinâmicas: ele entrega este 404.html para qualquer endereço que não
+  existe, e o script abaixo lê o código em /convite/CODIGO. Com o jogo instalado
+  e o App Link verificado (/.well-known/assetlinks.json), o Android abre o app
+  direto e esta página nem aparece. Outros endereços mostram "página não encontrada".
+  Tudo fica nesta página (estilos, desenho e script), sem cookies nem rastreadores.
+-->
+<style>
+  :root {
+    --pergaminho: #F3E6C8;
+    --pergaminho-claro: #FBF5E6;
+    --pergaminho-escuro: #E6D3A8;
+    --esmeralda: #2E7D5B;
+    --vinho: #7A1F2B;
+    --bronze: #B07A3B;
+    --tinta: #3B2A1E;
+    --tinta-suave: #5C4636;
+    --raio: 18px;
+    --fonte-titulo: "Baloo 2", "Nunito", "Trebuchet MS", system-ui, sans-serif;
+    --fonte-texto: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; display: flex; flex-direction: column;
+    background: linear-gradient(180deg, var(--pergaminho-claro), var(--pergaminho));
+    color: var(--tinta); font-family: var(--fonte-texto); font-size: 17px; line-height: 1.55;
+  }
+  a { color: var(--vinho); }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--esmeralda); outline-offset: 3px; }
+  header {
+    background: var(--vinho); color: var(--pergaminho-claro); border-bottom: 6px solid var(--bronze);
+    padding: 12px 20px;
+  }
+  .marca {
+    display: inline-flex; align-items: center; gap: 10px; color: inherit; text-decoration: none;
+    font-family: var(--fonte-titulo); font-weight: 800; font-size: 22px;
+  }
+  .marca svg { width: 32px; height: 32px; }
+  main { flex: 1; display: flex; justify-content: center; padding: 28px 16px 40px; min-width: 0; }
+  .cartao {
+    width: 100%; max-width: 480px; min-width: 0; text-align: center; overflow-wrap: anywhere;
+    background: #fff; border: 2px solid var(--pergaminho-escuro); border-radius: var(--raio);
+    padding: 24px 20px 28px; box-shadow: 0 4px 0 var(--pergaminho-escuro);
+  }
+  .lumina { width: 120px; height: auto; }
+  h1 {
+    font-family: var(--fonte-titulo); font-weight: 800; color: var(--vinho);
+    font-size: clamp(26px, 6vw, 34px); line-height: 1.15; margin: 8px 0 8px;
+  }
+  p { margin: 0 0 14px; color: var(--tinta-suave); }
+  .codigo {
+    display: inline-block; margin: 6px 0 4px; padding: 10px 18px;
+    background: var(--pergaminho); border: 2px dashed var(--bronze); border-radius: 14px;
+    font-family: var(--fonte-titulo); font-weight: 800; font-size: clamp(30px, 9vw, 40px);
+    letter-spacing: 4px; color: var(--tinta);
+  }
+  .botoes { display: grid; gap: 12px; margin: 18px 0 8px; }
+  .botao {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    background: var(--tinta); color: var(--pergaminho-claro); border: 0; cursor: pointer;
+    padding: 12px 20px; border-radius: 14px; text-decoration: none; font: inherit; font-weight: 800;
+    box-shadow: 0 4px 0 #1f160f;
+  }
+  .botao.secundario { background: transparent; color: var(--vinho); box-shadow: inset 0 0 0 2px var(--vinho); }
+  .botao.discreto { background: transparent; color: var(--vinho); box-shadow: none; padding: 6px; text-decoration: underline; }
+  ol { text-align: left; margin: 14px 0 0; padding-left: 22px; color: var(--tinta-suave); }
+  ol li { margin-bottom: 6px; }
+  .aviso { font-size: 15px; font-weight: 700; color: var(--esmeralda); min-height: 1.5em; margin: 4px 0 0; }
+  [hidden] { display: none !important; }
+  footer { background: var(--tinta); color: var(--pergaminho); padding: 18px 20px; font-size: 14px; text-align: center; }
+  footer a { color: var(--pergaminho); }
+</style>
+</head>
+<body>
+<header>
+  <a class="marca" href="/" aria-label="Word Sword, página inicial">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#F3E6C8"/><path d="M32 6l9 10v26H23V16z" fill="#C9D2DC"/><path d="M32 6l9 10v26h-9z" fill="#E6EAF0"/><rect x="14" y="42" width="36" height="6" rx="3" fill="#B07A3B"/><rect x="28" y="48" width="8" height="6" fill="#7A1F2B"/><circle cx="32" cy="57" r="4" fill="#B07A3B"/><circle cx="32" cy="57" r="1.8" fill="#2E7D5B"/></svg>
+    Word Sword
+  </a>
+</header>
+
+<main>
+  <div class="cartao">
+    <svg class="lumina" viewBox="0 0 240 320" role="img" aria-label="Lumina, a espada mascote do jogo">
+      <path d="M120 18 L176 70 L176 212 L64 212 L64 70 Z" fill="#B9C9DB"/>
+      <path d="M120 40 L160 78 L160 212 L80 212 L80 78 Z" fill="#E3E8EE"/>
+      <circle cx="102" cy="150" r="15" fill="#4A2A17"/><circle cx="138" cy="150" r="15" fill="#4A2A17"/>
+      <circle cx="107" cy="144" r="4.5" fill="#fff"/><circle cx="143" cy="144" r="4.5" fill="#fff"/>
+      <path d="M108 174 Q120 188 132 174 Q120 180 108 174 Z" fill="#8E2F38"/>
+      <rect x="44" y="210" width="152" height="22" rx="8" fill="#B07A3B"/>
+      <rect x="106" y="232" width="28" height="48" rx="6" fill="#7A1F2B"/>
+      <circle cx="120" cy="296" r="20" fill="#B07A3B"/>
+      <circle cx="120" cy="296" r="9" fill="#2E7D5B"/>
+    </svg>
+
+    <!-- Convite válido -->
+    <section id="convite" hidden>
+      <h1>Você foi convidado para uma equipe no Word Sword!</h1>
+      <p>Este é o código do convite:</p>
+      <div class="codigo" id="codigo" aria-live="polite"></div>
+      <div>
+        <button class="botao discreto" type="button" id="copiar">Copiar código</button>
+      </div>
+      <p class="aviso" id="aviso" role="status"></p>
+      <div class="botoes">
+        <a class="botao" id="loja" href="https://play.google.com/store/apps/details?id=br.com.wordsword.app">
+          Baixar no Google Play
+        </a>
+        <a class="botao secundario" id="abrir" href="#" hidden>Já tenho o jogo: abrir o convite</a>
+      </div>
+      <ol>
+        <li>Instale o Word Sword pelo Google Play.</li>
+        <li>Abra o jogo e toque em <strong>Equipe</strong>.</li>
+        <li>Digite o código acima em <strong>Código do convite</strong>.</li>
+      </ol>
+      <p style="margin-top: 14px; font-size: 14px;">As equipes abrem a partir do nível 10.</p>
+    </section>
+
+    <!-- Código fora do padrão -->
+    <section id="invalido" hidden>
+      <h1>Convite inválido</h1>
+      <p>Este link de convite não está certo. Peça um novo para quem convidou você.</p>
+      <div class="botoes">
+        <a class="botao" href="https://play.google.com/store/apps/details?id=br.com.wordsword.app">Conhecer o jogo no Google Play</a>
+      </div>
+    </section>
+
+    <!-- Qualquer outro endereço -->
+    <section id="nao-encontrada">
+      <h1>Página não encontrada</h1>
+      <p>A Lumina procurou por todo o reino e não achou esta página.</p>
+      <div class="botoes">
+        <a class="botao" href="/">Ir para a página inicial</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <a href="/privacidade.html">Política de privacidade</a> ·
+  <a href="mailto:contato@wordsword.com.br">contato@wordsword.com.br</a>
+</footer>
+
+<script>
+  (function () {
+    // Mesmo padrão do jogo: 8 caracteres, sem 0, O, 1, I e L (que se confundem).
+    var PADRAO = /^[A-HJKMNP-Z2-9]{8}$/;
+    var caminho = location.pathname.match(/^\/convite\/([^\/]+)\/?$/i);
+    if (!caminho) return; // fica a mensagem de página não encontrada
+
+    var mostrar = function (id) {
+      document.getElementById('nao-encontrada').hidden = true;
+      document.getElementById(id).hidden = false;
+    };
+
+    var codigo = decodeURIComponent(caminho[1]).trim().toUpperCase();
+    if (!PADRAO.test(codigo)) {
+      document.title = 'Convite inválido · Word Sword';
+      mostrar('invalido');
+      return;
+    }
+
+    mostrar('convite');
+    // textContent: o código do endereço nunca vira HTML.
+    document.getElementById('codigo').textContent = codigo;
+
+    // A loja recebe o código só como referência; o jogo não usa o Play Install Referrer.
+    var loja = document.getElementById('loja');
+    loja.href += '&referrer=' + encodeURIComponent('convite=' + codigo);
+
+    // No Android, reserva enquanto o App Link não estiver verificado: abre o app pelo
+    // esquema wordsword://convite/CODIGO; sem o app, o Android leva para a loja.
+    if (/Android/i.test(navigator.userAgent)) {
+      var abrir = document.getElementById('abrir');
+      abrir.href =
+        'intent://convite/' + codigo +
+        '#Intent;scheme=wordsword;package=br.com.wordsword.app;end';
+      abrir.hidden = false;
+    }
+
+    var aviso = document.getElementById('aviso');
+    document.getElementById('copiar').addEventListener('click', function () {
+      var copiado = function () { aviso.textContent = 'Código copiado!'; };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(codigo).then(copiado, function () {
+          aviso.textContent = 'Não deu para copiar: anote o código ' + codigo + '.';
+        });
+      } else {
+        aviso.textContent = 'Anote o código: ' + codigo + '.';
+      }
+    });
+  })();
+</script>
+</body>
+</html>

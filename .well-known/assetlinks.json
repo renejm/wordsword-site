@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "br.com.wordsword.app",
+      "sha256_cert_fingerprints": [
+        "SUBSTITUIR_PELO_SHA256_DA_ASSINATURA_DO_GOOGLE_PLAY",
+        "SUBSTITUIR_PELO_SHA256_DO_EAS_PARA_TESTES"
+      ]
+    }
+  }
+]
